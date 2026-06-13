@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Even Healthcare — evenos.app</title>
+<meta name="description" content="Even Healthcare — unified access to all hospital systems." />
+<style>
+  :root{
+    --navy:#1f3a63; --navy2:#2b5191; --blue:#3b82f6; --ink:#0f172a;
+    --muted:#64748b; --line:#e6eaf0; --bg:#f5f7fa; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:54px 20px 64px}
+  .hero-in{max-width:1040px;margin:0 auto}
+  .brand{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .brand span{opacity:.7;font-weight:500}
+  .tag{margin-top:8px;color:#c7d6ef;font-size:15px;max-width:600px}
+  .wrap{max-width:1040px;margin:-36px auto 0;padding:0 20px 56px}
+
+  /* Anchor box (EHRC) with its sub-surfaces */
+  .anchor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 6px 22px rgba(15,23,42,.05)}
+  .anchor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .open{white-space:nowrap;text-decoration:none;color:#fff;background:var(--navy);border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:600}
+  .open:hover{background:var(--navy2)}
+  .subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .subcard{display:flex;flex-direction:column;gap:5px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+  .subcard:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,23,42,.07);border-color:#c7d2e3}
+  .sttl{font-weight:700;font-size:15px}
+  .ssub{color:var(--muted);font-size:12.5px;line-height:1.45;flex:1}
+  .shost{color:var(--blue);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+
+  /* Other system boxes */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+  .card{display:flex;flex-direction:column;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;min-height:128px}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,.08);border-color:#c7d2e3}
+  .ttl{font-size:17px;font-weight:700}
+  .sub{margin-top:5px;color:var(--muted);font-size:13.5px;line-height:1.45}
+  .row{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+  .host{color:var(--blue);font-size:12.5px;font-weight:600}
+  .arrow{color:var(--blue);font-size:16px;line-height:1}
+  .pill{display:inline-block;font-size:11px;font-weight:600;color:var(--navy);background:#eaf0fb;border-radius:999px;padding:2px 9px;margin-left:6px;vertical-align:middle}
+  .foot{max-width:1040px;margin:0 auto;padding:8px 20px 40px;color:#94a3b8;font-size:12.5px}
+  a{color:inherit}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-in">
+      <div class="brand">Even Healthcare <span>· evenos.app</span></div>
+      <div class="tag">Unified access to every Even Healthcare system. Pick a destination below, or use a shortcut like <code style="color:#dbe7ff">evenos.app/surgicalrisk</code>.</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- EHRC anchor box + its surfaces -->
+    <section class="anchor">
+      <div class="anchor-head">
+        <div>
+          <div class="ttl">EHRC Daily Dash</div>
+          <div class="sub">Even Hospital, Race Course Road — daily operations hub.</div>
+        </div>
+        <a class="open" href="https://ehrc.evenos.app">Open dashboard&nbsp; &rarr;</a>
+      </div>
+      <div class="subgrid">
+        <a class="subcard" href="https://ehrc.evenos.app/surgery-booking">
+          <div class="sttl">Surgery Booking</div>
+          <div class="ssub">Marketing intake — book a surgery &amp; hand off to CC.</div>
+          <div class="shost">evenos.app/surgery-booking <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://ehrc.evenos.app/cc-desk">
+          <div class="sttl">CC Desk</div>
+          <div class="ssub">Counselling &amp; admission queue + ready-to-sign PDFs.</div>
+          <div class="shost">evenos.app/cc-desk <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://ehrc.evenos.app/surgical-risk">
+          <div class="sttl">Surgical Risk <span class="pill">SREWS</span></div>
+          <div class="ssub">Surgical Early Warning System — risk scoring dashboard.</div>
+          <div class="shost">evenos.app/surgicalrisk <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CDMSS / CAT anchor box + its surfaces -->
+    <section class="anchor">
+      <div class="anchor-head">
+        <div>
+          <div class="ttl">Clinical Analysis Tool <span class="pill">CDMSS</span></div>
+          <div class="sub">Clinical decision support — MKSAP/StatPearls-grounded answers, differentials, drugs &amp; calculators.</div>
+        </div>
+        <a class="open" href="https://even-cdmss.vercel.app/ask">Open CAT&nbsp; &rarr;</a>
+      </div>
+      <div class="subgrid">
+        <a class="subcard" href="https://even-cdmss.vercel.app/admin/literature">
+          <div class="sttl">CDMSS Database</div>
+          <div class="ssub">Literature engine — corpus, topics, ingestion runs &amp; retractions.</div>
+          <div class="shost">evenos.app/cdmss-db <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://even-cdmss.vercel.app/admin/observability">
+          <div class="sttl">Observability <span class="pill">internal</span></div>
+          <div class="ssub">Query history &amp; full pipeline audit of the CDMSS database.</div>
+          <div class="shost">evenos.app/cdmss-obs <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Even Appraise anchor box + its surfaces -->
+    <section class="anchor">
+      <div class="anchor-head">
+        <div>
+          <div class="ttl">Even Appraise <span class="pill">HR</span></div>
+          <div class="sub">Performance appraisal system — full cycle, mobile-first. HR sign-in required; employees &amp; HODs use personal links sent by HR.</div>
+        </div>
+        <a class="open" href="https://appraise.evenos.app/admin">Open admin&nbsp; &rarr;</a>
+      </div>
+      <div class="subgrid">
+        <a class="subcard" href="https://appraise.evenos.app/admin/dashboard">
+          <div class="sttl">Live Dashboard</div>
+          <div class="ssub">Cycle command centre — funnel, pending lists, HOD progress, live activity.</div>
+          <div class="shost">appraise.evenos.app/admin/dashboard <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://appraise.evenos.app/admin/roster">
+          <div class="sttl">Roster</div>
+          <div class="ssub">Org view — add/remap staff &amp; HODs, live submit dots &amp; scoring rings.</div>
+          <div class="shost">appraise.evenos.app/admin/roster <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://appraise.evenos.app/admin/scoring">
+          <div class="sttl">Scoring Browser</div>
+          <div class="ssub">Every HOD&apos;s scoring of every employee, including work in progress.</div>
+          <div class="shost">appraise.evenos.app/admin/scoring <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Other systems -->
+    <div class="grid">
+      <a class="card" href="https://ehbr.evenos.app">
+        <div>
+          <div class="ttl">EHBR Daily Dash</div>
+          <div class="sub">Even Healthcare, HBR Layout (Altius) — daily operations.</div>
+        </div>
+        <div class="row"><span class="host">ehbr.evenos.app</span><span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="card" href="https://doctors.evenos.app">
+        <div>
+          <div class="ttl">Physician Portal</div>
+          <div class="sub">Even Physician Portal — sign in with your hospital email &amp; PIN.</div>
+        </div>
+        <div class="row"><span class="host">doctors.evenos.app</span><span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="card" href="https://governance.evenos.app">
+        <div>
+          <div class="ttl">Governance</div>
+          <div class="sub">Governance &amp; compliance surfaces.</div>
+        </div>
+        <div class="row"><span class="host">governance.evenos.app</span><span class="arrow">&rarr;</span></div>
+      </a>
+    </div>
+  </main>
+
+  <div class="foot">Even Healthcare &copy; 2026 · evenos.app</div>
+</body>
+</html>

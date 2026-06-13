@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/surgicalrisk", "destination": "https://ehrc.evenos.app/surgical-risk", "permanent": true },
+    { "source": "/surgery-booking", "destination": "https://ehrc.evenos.app/surgery-booking", "permanent": true },
+    { "source": "/cc-desk", "destination": "https://ehrc.evenos.app/cc-desk", "permanent": true },
+    { "source": "/cdmss-db", "destination": "https://even-cdmss.vercel.app/admin/literature", "permanent": true },
+    { "source": "/cdmss-obs", "destination": "https://even-cdmss.vercel.app/admin/observability", "permanent": true },
+    { "source": "/appraise", "destination": "https://appraise.evenos.app/admin", "permanent": true }
+  ]
+}
