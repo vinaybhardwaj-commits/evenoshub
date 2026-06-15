@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/", "has": [{ "type": "host", "value": "scribe.evenos.app" }], "destination": "https://www.evenscribe.app/admin", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "scribe.evenos.app" }], "destination": "https://www.evenscribe.app/admin", "permanent": true },
     { "source": "/surgicalrisk", "destination": "https://ehrc.evenos.app/surgical-risk", "permanent": true },
     { "source": "/surgery-booking", "destination": "https://ehrc.evenos.app/surgery-booking", "permanent": true },
