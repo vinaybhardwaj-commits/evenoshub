@@ -44,6 +44,28 @@
   .pill{display:inline-block;font-size:11px;font-weight:600;color:var(--navy);background:#eaf0fb;border-radius:999px;padding:2px 9px;margin-left:6px;vertical-align:middle}
   .foot{max-width:1040px;margin:0 auto;padding:8px 20px 40px;color:#94a3b8;font-size:12.5px}
   a{color:inherit}
+
+  /* CDMSS re-screen live status card */
+  .rs-body{display:flex;flex-direction:column;gap:14px}
+  .rs-bar{height:12px;background:#eef2f7;border-radius:999px;overflow:hidden}
+  .rs-fill{height:100%;width:0;background:linear-gradient(90deg,var(--navy2),var(--blue));border-radius:999px;transition:width .6s ease}
+  .rs-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media (max-width:560px){.rs-meta{grid-template-columns:repeat(2,1fr)}}
+  .rs-stat{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+  .rs-num{font-size:21px;font-weight:800;color:var(--navy);line-height:1.1}
+  .rs-cap{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+  .rs-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .rs-chip{font-size:12.5px;font-weight:600;border-radius:999px;padding:4px 11px;border:1px solid var(--line)}
+  .rs-chip b{font-weight:800}
+  .rs-keep{background:#eaf7ef;color:#1f7a44;border-color:#cfead9}
+  .rs-mixed{background:#fff5e6;color:#9a6700;border-color:#f3e2c0}
+  .rs-drop{background:#fdecec;color:#b42318;border-color:#f6d5d2}
+  .rs-err{background:#fdecec;color:#b42318;border-color:#f6d5d2}
+  .rs-foot{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12.5px}
+  .rs-live{background:#eaf7ef;color:#1f7a44}
+  .rs-off{background:#f1f5f9;color:#94a3b8}
+  .rs-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:#22c55e;vertical-align:middle;animation:rs-pulse 1.6s ease-in-out infinite}
+  @keyframes rs-pulse{0%,100%{opacity:1}50%{opacity:.35}}
 </style>
 </head>
 <body>
@@ -129,6 +151,28 @@
       </div>
     </section>
 
+    <!-- CDMSS Re-screen — live status polled from the Mini (status.llmvinayminihome.uk) -->
+    <section class="anchor" id="rescreen-card">
+      <div class="anchor-head">
+        <div>
+          <div class="ttl">CDMSS Re-screen <span class="pill rs-off" id="rs-pill">…</span></div>
+          <div class="sub" id="rs-label">Strict-clinical precision pass on the Mini — live progress.</div>
+        </div>
+        <a class="open" href="https://status.llmvinayminihome.uk/rescreen.json" target="_blank" rel="noopener">Raw JSON&nbsp; &rarr;</a>
+      </div>
+      <div class="rs-body">
+        <div class="rs-bar"><div class="rs-fill" id="rs-fill"></div></div>
+        <div class="rs-meta">
+          <div class="rs-stat"><div class="rs-num" id="rs-pct">—</div><div class="rs-cap">complete</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-decided">—</div><div class="rs-cap">decided</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-rate">—</div><div class="rs-cap">per min</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-eta">—</div><div class="rs-cap">ETA</div></div>
+        </div>
+        <div class="rs-chips" id="rs-chips"></div>
+        <div class="rs-foot"><span id="rs-status">connecting…</span><span id="rs-updated"></span></div>
+      </div>
+    </section>
+
     <!-- Even Appraise anchor box + its surfaces -->
     <section class="anchor">
       <div class="anchor-head">
@@ -186,5 +230,43 @@
   </main>
 
   <div class="foot">Even Healthcare &copy; 2026 · evenos.app</div>
+  <script>
+  (function(){
+    var STATUS_URL = "https://status.llmvinayminihome.uk/rescreen.json";
+    var $ = function(id){ return document.getElementById(id); };
+    function ago(ep){ if(!ep) return ""; var s=Math.max(0,Math.floor(Date.now()/1000)-ep); return s<60? s+"s ago" : Math.floor(s/60)+"m ago"; }
+    function num(n){ return (n==null)? "—" : Number(n).toLocaleString(); }
+    function tick(){
+      fetch(STATUS_URL,{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
+        if(!d || !d.ready){ throw new Error("not ready"); }
+        $("rs-label").textContent = d.label + (d.done? " · complete" : "");
+        $("rs-fill").style.width = (d.pct||0) + "%";
+        $("rs-pct").textContent = (d.pct!=null? d.pct : "—") + "%";
+        $("rs-decided").textContent = num(d.decided) + " / " + num(d.total);
+        $("rs-rate").textContent = (d.rate_per_min!=null? d.rate_per_min : "—");
+        $("rs-eta").textContent = d.done? "done" : (d.eta_human || "—");
+        var m = d.decisions || {}, chips=[];
+        if(m.keep!=null) chips.push('<span class="rs-chip rs-keep">keep <b>'+num(m.keep)+'</b></span>');
+        if(m.mixed!=null) chips.push('<span class="rs-chip rs-mixed">mixed <b>'+num(m.mixed)+'</b></span>');
+        if(m.borderline!=null) chips.push('<span class="rs-chip rs-mixed">borderline <b>'+num(m.borderline)+'</b></span>');
+        if(m.drop!=null) chips.push('<span class="rs-chip rs-drop">drop <b>'+num(m.drop)+'</b></span>');
+        if(d.llm_errors) chips.push('<span class="rs-chip rs-err">errors <b>'+num(d.llm_errors)+'</b></span>');
+        $("rs-chips").innerHTML = chips.join("");
+        var pill=$("rs-pill");
+        if(d.done){ pill.textContent="DONE"; pill.className="pill rs-off"; }
+        else if(d.running){ pill.textContent="LIVE"; pill.className="pill rs-live"; }
+        else { pill.textContent="IDLE"; pill.className="pill rs-off"; }
+        var dot = d.running? '<span class="rs-dot"></span>' : '';
+        $("rs-status").innerHTML = dot + (d.done? ("Complete — "+d.label) : (d.running? (d.label+" running") : "Idle / between stages"));
+        $("rs-updated").textContent = "updated " + ago(d.updated_epoch);
+      }).catch(function(){
+        $("rs-status").textContent = "Status endpoint offline";
+        var p=$("rs-pill"); p.textContent="OFFLINE"; p.className="pill rs-off";
+        $("rs-updated").textContent="";
+      });
+    }
+    tick(); setInterval(tick, 5000);
+  })();
+  </script>
 </body>
 </html>
