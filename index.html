@@ -113,6 +113,7 @@
       <div class="st-item"><span class="dot" id="d-ai"></span><span class="lbl">AI brain</span><span class="det" id="t-ai">checking&hellip;</span></div>
       <div class="st-item"><span class="dot" id="d-apps"></span><span class="lbl">Apps</span><span class="det" id="t-apps">&hellip;</span></div>
       <div class="st-item"><span class="dot" id="d-db"></span><span class="lbl">Database</span><span class="det" id="t-db">&hellip;</span></div>
+      <div class="st-item"><span class="dot" id="d-sp"></span><span class="lbl">Speech</span><span class="det" id="t-sp">&hellip;</span></div>
       <div class="st-right">
         <span class="st-meta" id="st-meta"></span>
         <a class="st-link" href="https://status.evenos.app">Full observatory &rarr;</a>
@@ -418,6 +419,9 @@
       var up=(d.apps||[]).filter(function(a){return a.up;}).length, tot=(d.apps||[]).length;
       set('d-apps','t-apps',up===tot?'ok':(tot-up>1?'down':'degraded'),up+'/'+tot+' up');
       set('d-db','t-db',d.neon&&d.neon.ok?'ok':'down',d.neon&&d.neon.ok?('Neon '+d.neon.latencyMs+'ms'):'error');
+      var sp=d.speech;
+      if(sp&&sp.ok){var act=(sp.engines||[]).filter(function(e){return e.runs>0;}).length;set('d-sp','t-sp',(sp.costToday/sp.budget>0.9)?'degraded':'ok',act+' active · $'+sp.costToday.toFixed(2)+'/$'+sp.budget.toFixed(0));}
+      else set('d-sp','t-sp','degraded','n/a');
       document.getElementById('st-meta').textContent='updated '+ago(d.generatedAt);
     }).catch(function(){set('d-ai','t-ai','down','status unavailable');document.getElementById('st-meta').textContent='';});
   }
