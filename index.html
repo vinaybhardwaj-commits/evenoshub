@@ -9,51 +9,32 @@
   :root{
     --navy:#1f3a63; --navy2:#2b5191; --blue:#3b82f6; --ink:#0f172a;
     --muted:#64748b; --line:#e6eaf0; --bg:#f5f7fa; --card:#ffffff;
-    --green:#16a34a; --amber:#d97706; --red:#dc2626;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-  .hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:48px 20px 70px}
+  .hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:54px 20px 64px}
   .hero-in{max-width:1040px;margin:0 auto}
   .brand{font-size:30px;font-weight:800;letter-spacing:-.5px}
   .brand span{opacity:.7;font-weight:500}
-  .tag{margin-top:8px;color:#c7d6ef;font-size:15px;max-width:640px}
-  .khint{margin-top:14px;display:inline-flex;align-items:center;gap:7px;color:#dbe7ff;font-size:12.5px;cursor:pointer;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:6px 11px}
-  .kbd{font-family:ui-monospace,Menlo,monospace;font-size:11px;background:rgba(255,255,255,.18);border-radius:5px;padding:1px 6px}
-  .wrap{max-width:1040px;margin:-44px auto 0;padding:0 20px 56px}
+  .tag{margin-top:8px;color:#c7d6ef;font-size:15px;max-width:600px}
+  .wrap{max-width:1040px;margin:-36px auto 0;padding:0 20px 56px}
 
-  /* Status strip */
-  .statusbar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:22px;box-shadow:0 6px 22px rgba(15,23,42,.06);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .st-item{display:flex;align-items:center;gap:8px;font-size:13px}
-  .st-item .lbl{font-weight:700}
-  .st-item .det{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:12px}
-  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;background:#cbd5e1}
-  .st-right{margin-left:auto;display:flex;align-items:center;gap:14px}
-  .st-meta{color:#94a3b8;font-size:11.5px;font-family:ui-monospace,Menlo,monospace}
-  .st-link{color:var(--blue);font-size:12.5px;font-weight:600;text-decoration:none;white-space:nowrap}
-
-  .sectitle{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#94a3b8;margin:26px 4px 12px}
-  .sectitle:first-of-type{margin-top:4px}
-
-  .anchor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px;box-shadow:0 6px 22px rgba(15,23,42,.05)}
-  .anchor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  /* Anchor box (EHRC) with its sub-surfaces */
+  .anchor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 6px 22px rgba(15,23,42,.05)}
+  .anchor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
   .open{white-space:nowrap;text-decoration:none;color:#fff;background:var(--navy);border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:600}
   .open:hover{background:var(--navy2)}
-  details.surfaces{margin-top:14px}
-  details.surfaces>summary{list-style:none;cursor:pointer;color:var(--blue);font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;user-select:none}
-  details.surfaces>summary::-webkit-details-marker{display:none}
-  details.surfaces>summary .chev{transition:transform .15s ease}
-  details.surfaces[open]>summary .chev{transform:rotate(90deg)}
-  .subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
   .subcard{display:flex;flex-direction:column;gap:5px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
   .subcard:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,23,42,.07);border-color:#c7d2e3}
   .sttl{font-weight:700;font-size:15px}
   .ssub{color:var(--muted);font-size:12.5px;line-height:1.45;flex:1}
   .shost{color:var(--blue);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
 
+  /* Other system boxes */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-  .card{display:flex;flex-direction:column;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;min-height:120px}
+  .card{display:flex;flex-direction:column;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;min-height:128px}
   .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,.08);border-color:#c7d2e3}
   .ttl{font-size:17px;font-weight:700}
   .sub{margin-top:5px;color:var(--muted);font-size:13.5px;line-height:1.45}
@@ -85,24 +66,6 @@
   .rs-off{background:#f1f5f9;color:#94a3b8}
   .rs-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:#22c55e;vertical-align:middle;animation:rs-pulse 1.6s ease-in-out infinite}
   @keyframes rs-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .cd-ev{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:6px 0;border-top:1px solid var(--line)}
-  .cd-ev:first-child{border-top:none}
-  .cd-ev .cd-t{font-weight:700}
-  .cd-ev .cd-m{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
-  .cd-ev .cd-a{margin-left:auto;color:#94a3b8;font-size:11px;font-family:ui-monospace,Menlo,monospace}
-  .cd-src .rs-chip{background:#f1f5f9;color:#475569;border-color:#e2e8f0}
-
-  /* Command palette */
-  .pal-bg{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:flex-start;justify-content:center;z-index:50}
-  .pal-bg.on{display:flex}
-  .pal{background:#fff;width:min(560px,92vw);margin-top:12vh;border-radius:14px;box-shadow:0 24px 60px rgba(15,23,42,.3);overflow:hidden}
-  .pal input{width:100%;border:none;border-bottom:1px solid var(--line);padding:16px 18px;font-size:15px;outline:none}
-  .pal-list{max-height:48vh;overflow:auto;padding:6px}
-  .pal-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:9px;cursor:pointer;text-decoration:none;color:inherit}
-  .pal-item.sel,.pal-item:hover{background:#eef2f9}
-  .pal-item .pn{font-weight:600;font-size:14px}
-  .pal-item .pg{color:#94a3b8;font-size:11px}
-  .pal-item .ph{color:var(--blue);font-size:11.5px;font-family:ui-monospace,Menlo,monospace}
 </style>
 </head>
 <body>
@@ -110,24 +73,11 @@
     <div class="hero-in">
       <div class="brand">Even Healthcare <span>· evenos.app</span></div>
       <div class="tag">Unified access to every Even Healthcare system. Pick a destination below, or use a shortcut like <code style="color:#dbe7ff">evenos.app/surgicalrisk</code>.</div>
-      <div class="khint" id="kopen"><span>Search</span><span class="kbd">&#8984; K</span></div>
     </div>
   </header>
 
   <main class="wrap">
-    <div class="statusbar" id="statusbar">
-      <div class="st-item"><span class="dot" id="d-ai"></span><span class="lbl">AI brain</span><span class="det" id="t-ai">checking&hellip;</span></div>
-      <div class="st-item"><span class="dot" id="d-apps"></span><span class="lbl">Apps</span><span class="det" id="t-apps">&hellip;</span></div>
-      <div class="st-item"><span class="dot" id="d-db"></span><span class="lbl">Database</span><span class="det" id="t-db">&hellip;</span></div>
-      <div class="st-item"><span class="dot" id="d-sp"></span><span class="lbl">Speech</span><span class="det" id="t-sp">&hellip;</span></div>
-      <div class="st-right">
-        <span class="st-meta" id="st-meta"></span>
-        <a class="st-link" href="https://status.evenos.app">Full observatory &rarr;</a>
-      </div>
-    </div>
-
-    <div class="sectitle">EHRC &middot; Race Course Road</div>
-
+    <!-- EHRC anchor box + its surfaces -->
     <section class="anchor">
       <div class="anchor-head">
         <div>
@@ -136,67 +86,49 @@
         </div>
         <a class="open" href="https://ehrc.evenos.app">Open dashboard&nbsp; &rarr;</a>
       </div>
-      <details class="surfaces">
-        <summary><span class="chev">&rsaquo;</span> 3 surfaces</summary>
-        <div class="subgrid">
-          <a class="subcard" href="https://ehrc.evenos.app/surgery-booking">
-            <div class="sttl">Surgery Booking</div>
-            <div class="ssub">Marketing intake — book a surgery &amp; hand off to CC.</div>
-            <div class="shost">evenos.app/surgery-booking <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://ehrc.evenos.app/cc-desk">
-            <div class="sttl">CC Desk</div>
-            <div class="ssub">Counselling &amp; admission queue + ready-to-sign PDFs.</div>
-            <div class="shost">evenos.app/cc-desk <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://ehrc.evenos.app/surgical-risk">
-            <div class="sttl">Surgical Risk <span class="pill">SREWS</span></div>
-            <div class="ssub">Surgical Early Warning System — risk scoring dashboard.</div>
-            <div class="shost">evenos.app/surgicalrisk <span class="arrow">&rarr;</span></div>
-          </a>
-        </div>
-      </details>
+      <div class="subgrid">
+        <a class="subcard" href="https://ehrc.evenos.app/surgery-booking">
+          <div class="sttl">Surgery Booking</div>
+          <div class="ssub">Marketing intake — book a surgery &amp; hand off to CC.</div>
+          <div class="shost">evenos.app/surgery-booking <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://ehrc.evenos.app/cc-desk">
+          <div class="sttl">CC Desk</div>
+          <div class="ssub">Counselling &amp; admission queue + ready-to-sign PDFs.</div>
+          <div class="shost">evenos.app/cc-desk <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://ehrc.evenos.app/surgical-risk">
+          <div class="sttl">Surgical Risk <span class="pill">SREWS</span></div>
+          <div class="ssub">Surgical Early Warning System — risk scoring dashboard.</div>
+          <div class="shost">evenos.app/surgicalrisk <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
     </section>
 
+    <!-- Even Staff Portal anchor box + its surfaces -->
     <section class="anchor">
       <div class="anchor-head">
         <div>
           <div class="ttl">Even Staff Portal</div>
-          <div class="sub">Internal staff homepage for hospital computers — announcements, bulletin, contacts, resources, videos &amp; Sewa.</div>
+          <div class="sub">Internal staff homepage for hospital computers &mdash; announcements, bulletin, contacts, resources, videos &amp; Sewa.</div>
         </div>
         <a class="open" href="https://staff.evenos.app/">Open portal&nbsp; &rarr;</a>
       </div>
-      <details class="surfaces">
-        <summary><span class="chev">&rsaquo;</span> 2 surfaces</summary>
-        <div class="subgrid">
-          <a class="subcard" href="https://staff.evenos.app/">
-            <div class="sttl">Staff Portal</div>
-            <div class="ssub">One-stop hub — updates, quick contacts, resources, bulletin &amp; raise a Sewa complaint.</div>
-            <div class="shost">staff.evenos.app <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://staff.evenos.app/admin">
-            <div class="sttl">Admin <span class="pill">Restricted</span></div>
-            <div class="ssub">Manage portal content — Sewa, bulletin, announcements, videos, resources, contacts &amp; audit log.</div>
-            <div class="shost">staff.evenos.app/admin <span class="arrow">&rarr;</span></div>
-          </a>
-        </div>
-      </details>
+      <div class="subgrid">
+        <a class="subcard" href="https://staff.evenos.app/">
+          <div class="sttl">Staff Portal</div>
+          <div class="ssub">One-stop hub &mdash; updates, quick contacts, resources, bulletin &amp; raise a Sewa complaint.</div>
+          <div class="shost">staff.evenos.app <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://staff.evenos.app/admin">
+          <div class="sttl">Admin <span class="pill">Restricted</span></div>
+          <div class="ssub">Manage portal content &mdash; Sewa, bulletin, announcements, videos, resources, contacts &amp; audit log.</div>
+          <div class="shost">staff.evenos.app/admin <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
     </section>
 
-    <div class="sectitle">EHBR &middot; HBR Layout (Altius)</div>
-
-    <div class="grid">
-      <a class="card" href="https://ehbr.evenos.app">
-        <div>
-          <div class="ttl">EHBR Daily Dash</div>
-          <div class="sub">Even Healthcare, HBR Layout (Altius) — daily operations.</div>
-        </div>
-        <div class="row"><span class="host">ehbr.evenos.app</span><span class="arrow">&rarr;</span></div>
-      </a>
-    </div>
-
-    <div class="sectitle">Shared &middot; clinical, people &amp; governance</div>
-
+    <!-- CDMSS / CAT anchor box + its surfaces -->
     <section class="anchor">
       <div class="anchor-head">
         <div>
@@ -205,44 +137,64 @@
         </div>
         <a class="open" href="https://even-cdmss.vercel.app/ask">Open CAT&nbsp; &rarr;</a>
       </div>
-      <details class="surfaces">
-        <summary><span class="chev">&rsaquo;</span> 2 surfaces</summary>
-        <div class="subgrid">
-          <a class="subcard" href="https://even-cdmss.vercel.app/admin/literature">
-            <div class="sttl">CDMSS Database</div>
-            <div class="ssub">Literature engine — corpus, topics, ingestion runs &amp; retractions.</div>
-            <div class="shost">evenos.app/cdmss-db <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://even-cdmss.vercel.app/admin/observability">
-            <div class="sttl">Observability <span class="pill">internal</span></div>
-            <div class="ssub">Query history &amp; full pipeline audit of the CDMSS database.</div>
-            <div class="shost">evenos.app/cdmss-obs <span class="arrow">&rarr;</span></div>
-          </a>
-        </div>
-      </details>
+      <div class="subgrid">
+        <a class="subcard" href="https://even-cdmss.vercel.app/admin/literature">
+          <div class="sttl">CDMSS Database</div>
+          <div class="ssub">Literature engine — corpus, topics, ingestion runs &amp; retractions.</div>
+          <div class="shost">evenos.app/cdmss-db <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://even-cdmss.vercel.app/admin/observability">
+          <div class="sttl">Observability <span class="pill">internal</span></div>
+          <div class="ssub">Query history &amp; full pipeline audit of the CDMSS database.</div>
+          <div class="shost">evenos.app/cdmss-obs <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
     </section>
 
-    <section class="anchor" id="cdmss-card">
+    <!-- CDMSS Re-screen — live status polled from the Mini (status.llmvinayminihome.uk) -->
+    <section class="anchor" id="rescreen-card">
       <div class="anchor-head">
         <div>
-          <div class="ttl">CDMSS Knowledge Engine <span class="pill rs-off" id="cd-pill">&hellip;</span></div>
-          <div class="sub" id="cd-label">PubMed harvest · corpus · curation — live background activity.</div>
+          <div class="ttl">CDMSS Re-screen <span class="pill rs-off" id="rs-pill">…</span></div>
+          <div class="sub" id="rs-label">Strict-clinical precision pass on the Mini — live progress.</div>
         </div>
-        <a class="open" href="https://even-cdmss.vercel.app/admin/literature" target="_blank" rel="noopener">Literature engine&nbsp; &rarr;</a>
+        <a class="open" href="https://status.llmvinayminihome.uk/rescreen.json" target="_blank" rel="noopener">Raw JSON&nbsp; &rarr;</a>
       </div>
       <div class="rs-body">
+        <div class="rs-bar"><div class="rs-fill" id="rs-fill"></div></div>
         <div class="rs-meta">
-          <div class="rs-stat"><div class="rs-num" id="cd-chunks">&mdash;</div><div class="rs-cap">corpus chunks</div></div>
-          <div class="rs-stat"><div class="rs-num" id="cd-topics">&mdash;</div><div class="rs-cap">topics harvested</div></div>
-          <div class="rs-stat"><div class="rs-num" id="cd-articles">&mdash;</div><div class="rs-cap">pubmed articles</div></div>
-          <div class="rs-stat"><div class="rs-num" id="cd-entities">&mdash;</div><div class="rs-cap">entities</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-pct">—</div><div class="rs-cap">complete</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-decided">—</div><div class="rs-cap">decided</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-rate">—</div><div class="rs-cap">per min</div></div>
+          <div class="rs-stat"><div class="rs-num" id="rs-eta">—</div><div class="rs-cap">ETA</div></div>
         </div>
-        <div class="rs-chips cd-src" id="cd-sources"></div>
-        <div id="cd-events"></div>
-        <div class="rs-foot"><span id="cd-status">connecting&hellip;</span><span id="cd-updated"></span></div>
+        <div class="rs-chips" id="rs-chips"></div>
+        <div class="rs-foot"><span id="rs-status">connecting…</span><span id="rs-updated"></span></div>
       </div>
     </section>
 
+    <!-- CDMSS Ingestion — live status polled from the Mini (status.llmvinayminihome.uk/ingest.json) -->
+    <section class="anchor" id="ingest-card">
+      <div class="anchor-head">
+        <div>
+          <div class="ttl">CDMSS Ingestion <span class="pill rs-off" id="ig-pill">…</span></div>
+          <div class="sub" id="ig-label">Embedding the curated keep set into the CDMSS vector DB.</div>
+        </div>
+        <a class="open" href="https://status.llmvinayminihome.uk/ingest.json" target="_blank" rel="noopener">Raw JSON&nbsp; &rarr;</a>
+      </div>
+      <div class="rs-body">
+        <div class="rs-bar"><div class="rs-fill" id="ig-fill"></div></div>
+        <div class="rs-meta">
+          <div class="rs-stat"><div class="rs-num" id="ig-pct">—</div><div class="rs-cap">complete</div></div>
+          <div class="rs-stat"><div class="rs-num" id="ig-ins">—</div><div class="rs-cap">chunks in db</div></div>
+          <div class="rs-stat"><div class="rs-num" id="ig-rate">—</div><div class="rs-cap">per min</div></div>
+          <div class="rs-stat"><div class="rs-num" id="ig-eta">—</div><div class="rs-cap">ETA</div></div>
+        </div>
+        <div class="rs-foot"><span id="ig-status">connecting…</span><span id="ig-updated"></span></div>
+      </div>
+    </section>
+
+    <!-- Even Appraise anchor box + its surfaces -->
     <section class="anchor">
       <div class="anchor-head">
         <div>
@@ -251,43 +203,35 @@
         </div>
         <a class="open" href="https://appraise.evenos.app/admin">Open admin&nbsp; &rarr;</a>
       </div>
-      <details class="surfaces">
-        <summary><span class="chev">&rsaquo;</span> 3 surfaces</summary>
-        <div class="subgrid">
-          <a class="subcard" href="https://appraise.evenos.app/admin/dashboard">
-            <div class="sttl">Live Dashboard</div>
-            <div class="ssub">Cycle command centre — funnel, pending lists, HOD progress, live activity.</div>
-            <div class="shost">appraise.evenos.app/admin/dashboard <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://appraise.evenos.app/admin/roster">
-            <div class="sttl">Roster</div>
-            <div class="ssub">Org view — add/remap staff &amp; HODs, live submit dots &amp; scoring rings.</div>
-            <div class="shost">appraise.evenos.app/admin/roster <span class="arrow">&rarr;</span></div>
-          </a>
-          <a class="subcard" href="https://appraise.evenos.app/admin/scoring">
-            <div class="sttl">Scoring Browser</div>
-            <div class="ssub">Every HOD&apos;s scoring of every employee, including work in progress.</div>
-            <div class="shost">appraise.evenos.app/admin/scoring <span class="arrow">&rarr;</span></div>
-          </a>
-        </div>
-      </details>
+      <div class="subgrid">
+        <a class="subcard" href="https://appraise.evenos.app/admin/dashboard">
+          <div class="sttl">Live Dashboard</div>
+          <div class="ssub">Cycle command centre — funnel, pending lists, HOD progress, live activity.</div>
+          <div class="shost">appraise.evenos.app/admin/dashboard <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://appraise.evenos.app/admin/roster">
+          <div class="sttl">Roster</div>
+          <div class="ssub">Org view — add/remap staff &amp; HODs, live submit dots &amp; scoring rings.</div>
+          <div class="shost">appraise.evenos.app/admin/roster <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="subcard" href="https://appraise.evenos.app/admin/scoring">
+          <div class="sttl">Scoring Browser</div>
+          <div class="ssub">Every HOD&apos;s scoring of every employee, including work in progress.</div>
+          <div class="shost">appraise.evenos.app/admin/scoring <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
     </section>
 
+    <!-- Other systems -->
     <div class="grid">
-      <a class="card" href="https://opd.evenos.app">
+      <a class="card" href="https://ehbr.evenos.app">
         <div>
-          <div class="ttl">OPD Demo</div>
-          <div class="sub">Doctor-facing OPD encounter app — recording, documentation, prescription &amp; WhatsApp dispatch.</div>
+          <div class="ttl">EHBR Daily Dash</div>
+          <div class="sub">Even Healthcare, HBR Layout (Altius) — daily operations.</div>
         </div>
-        <div class="row"><span class="host">opd.evenos.app</span><span class="arrow">&rarr;</span></div>
+        <div class="row"><span class="host">ehbr.evenos.app</span><span class="arrow">&rarr;</span></div>
       </a>
-      <a class="card" href="https://scribe.evenos.app">
-        <div>
-          <div class="ttl">Even Scribe <span class="pill">Admin</span></div>
-          <div class="sub">AI medical scribe (ETA) — admin console: encounters, audio, STT lab &amp; system map.</div>
-        </div>
-        <div class="row"><span class="host">scribe.evenos.app</span><span class="arrow">&rarr;</span></div>
-      </a>
+
       <a class="card" href="https://doctors.evenos.app">
         <div>
           <div class="ttl">Physician Portal</div>
@@ -295,6 +239,7 @@
         </div>
         <div class="row"><span class="host">doctors.evenos.app</span><span class="arrow">&rarr;</span></div>
       </a>
+
       <a class="card" href="https://governance.evenos.app">
         <div>
           <div class="ttl">Governance</div>
@@ -303,134 +248,69 @@
         <div class="row"><span class="host">governance.evenos.app</span><span class="arrow">&rarr;</span></div>
       </a>
     </div>
-
-    <div class="sectitle">Operations</div>
-
-    <div class="grid">
-      <a class="card" href="https://status.evenos.app">
-        <div>
-          <div class="ttl">Backend Observatory</div>
-          <div class="sub">AI, apps &amp; infra at a glance — Ollama models, app health &amp; database.</div>
-        </div>
-        <div class="row"><span class="host">status.evenos.app</span><span class="arrow">&rarr;</span></div>
-      </a>
-    </div>
   </main>
 
   <div class="foot">Even Healthcare &copy; 2026 · evenos.app</div>
-
-  <div class="pal-bg" id="palbg">
-    <div class="pal" role="dialog" aria-label="Search destinations">
-      <input id="palq" type="text" placeholder="Search systems and surfaces…" autocomplete="off" />
-      <div class="pal-list" id="pallist"></div>
-    </div>
-  </div>
-
-<script>
-(function(){
-  var $ = function(id){ return document.getElementById(id); };
-  function num(n){ return n==null? '—' : Number(n).toLocaleString(); }
-  function ago(iso){ if(!iso) return ''; var s=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/1000)); return s<60? s+'s ago' : s<3600? Math.round(s/60)+'m ago' : s<86400? Math.round(s/3600)+'h ago' : Math.round(s/86400)+'d ago'; }
-  var SRC={pubmed:'PubMed',statpearls:'StatPearls',uptodate:'UpToDate',openfda:'OpenFDA','mksap-19':'MKSAP',textbook:'Textbook'};
-  function tick(){
-    fetch('https://status.evenos.app/api/cdmss',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-      if(!d.ok) throw new Error('x');
-      var c=d.corpus,h=d.harvest;
-      $('cd-chunks').textContent=num(c.chunks);
-      $('cd-topics').textContent=h.topicsRun+' / '+h.topicsTotal;
-      $('cd-articles').textContent=num(c.articles);
-      $('cd-entities').textContent=num(c.entities);
-      $('cd-sources').innerHTML=(c.sources||[]).map(function(s){return '<span class="rs-chip">'+(SRC[s.name]||s.name)+' <b>'+num(s.count)+'</b></span>';}).join('');
-      $('cd-events').innerHTML=(d.events||[]).slice(0,6).map(function(e){
-        var col=e.errors>0?'var(--amber)':'var(--green)';
-        var dot=e.running?'<span class="rs-dot"></span>':'<span class="dot" style="background:'+col+'"></span>';
-        var meta='found '+num(e.found)+' · new '+num(e.inserted)+(e.errors?' · '+e.errors+' err':'');
-        return '<div class="cd-ev">'+dot+'<span class="cd-t">'+(e.topic||'(global)')+'</span><span class="cd-m">'+meta+'</span><span class="cd-a">'+ago(e.at)+'</span></div>';
-      }).join('');
-      var pill=$('cd-pill'),st=d.state;
-      if(st==='harvesting'||st==='curating'||st==='active'){pill.textContent=st.toUpperCase();pill.className='pill rs-live';}
-      else{pill.textContent='IDLE';pill.className='pill rs-off';}
-      var dt=(st==='idle')?'':'<span class="rs-dot"></span>';
-      $('cd-status').innerHTML=dt+(h.running?'Pipeline running':(h.lastRunAt?('Idle · last harvest '+ago(h.lastRunAt)):'No harvests yet'));
-      $('cd-label').textContent='PubMed harvest · '+num(c.chunks)+' chunks · '+num(c.topics)+' curated topics';
-      $('cd-updated').textContent='updated '+ago(d.generatedAt);
-    }).catch(function(){
-      var s=$('cd-status'); if(s) s.textContent='CDMSS endpoint offline';
-      var p=$('cd-pill'); if(p){ p.textContent='OFFLINE'; p.className='pill rs-off'; }
-    });
-  }
-  tick(); setInterval(tick, 10000);
-})();
-(function(){
-  var DEST = [
-    ['EHRC Daily Dash','EHRC','https://ehrc.evenos.app'],
-    ['Surgery Booking','EHRC','https://ehrc.evenos.app/surgery-booking'],
-    ['CC Desk','EHRC','https://ehrc.evenos.app/cc-desk'],
-    ['Surgical Risk (SREWS)','EHRC','https://ehrc.evenos.app/surgical-risk'],
-    ['Staff Portal','EHRC','https://staff.evenos.app/'],
-    ['Staff Portal Admin','EHRC','https://staff.evenos.app/admin'],
-    ['EHBR Daily Dash','EHBR','https://ehbr.evenos.app'],
-    ['Clinical Analysis Tool (CAT)','Shared','https://even-cdmss.vercel.app/ask'],
-    ['CDMSS Database','Shared','https://even-cdmss.vercel.app/admin/literature'],
-    ['CDMSS Observability','Shared','https://even-cdmss.vercel.app/admin/observability'],
-    ['Even Appraise','Shared','https://appraise.evenos.app/admin'],
-    ['Appraise — Live Dashboard','Shared','https://appraise.evenos.app/admin/dashboard'],
-    ['Appraise — Roster','Shared','https://appraise.evenos.app/admin/roster'],
-    ['Appraise — Scoring Browser','Shared','https://appraise.evenos.app/admin/scoring'],
-    ['OPD Demo','Shared','https://opd.evenos.app'],
-    ['Even Scribe','Shared','https://scribe.evenos.app'],
-    ['Physician Portal','Shared','https://doctors.evenos.app'],
-    ['Governance','Shared','https://governance.evenos.app'],
-    ['Backend Observatory','Operations','https://status.evenos.app']
-  ];
-  var bg=document.getElementById('palbg'), q=document.getElementById('palq'), list=document.getElementById('pallist'), sel=0, shown=DEST;
-  function host(u){return u.replace(/^https?:\/\//,'').replace(/\/$/,'');}
-  function render(){
-    list.innerHTML='';
-    shown.forEach(function(d,i){
-      var a=document.createElement('a'); a.className='pal-item'+(i===sel?' sel':''); a.href=d[2];
-      a.innerHTML='<span><span class="pn">'+d[0]+'</span> <span class="pg">'+d[1]+'</span></span><span class="ph">'+host(d[2])+'</span>';
-      list.appendChild(a);
-    });
-  }
-  function filter(){
-    var s=q.value.trim().toLowerCase();
-    shown=DEST.filter(function(d){return (d[0]+' '+d[1]+' '+d[2]).toLowerCase().indexOf(s)>-1;});
-    sel=0; render();
-  }
-  function open(){bg.classList.add('on'); q.value=''; shown=DEST; sel=0; render(); setTimeout(function(){q.focus();},30);}
-  function close(){bg.classList.remove('on');}
-  document.getElementById('kopen').addEventListener('click',open);
-  bg.addEventListener('click',function(e){if(e.target===bg)close();});
-  q.addEventListener('input',filter);
-  document.addEventListener('keydown',function(e){
-    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();bg.classList.contains('on')?close():open();return;}
-    if(!bg.classList.contains('on'))return;
-    if(e.key==='Escape')close();
-    else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,shown.length-1);render();}
-    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);render();}
-    else if(e.key==='Enter'){if(shown[sel])window.location.href=shown[sel][2];}
-  });
-
-  function ago(iso){var s=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/1000));return s<60?s+'s ago':Math.round(s/60)+'m ago';}
-  function color(state){return state==='ok'||state===true?'var(--green)':state==='degraded'?'var(--amber)':'var(--red)';}
-  function set(dotId,txtId,state,txt){document.getElementById(dotId).style.background=color(state);document.getElementById(txtId).textContent=txt;}
-  function loadStatus(){
-    fetch('https://status.evenos.app/api/status',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-      var o=d.ollama||{};
-      if(o.ok){var names=(o.loaded||[]).map(function(m){return m.name;});var head=names[0]||'idle';var extra=names.length>1?(' +'+(names.length-1)):'';set('d-ai','t-ai','ok',head+extra+' · '+o.latencyMs+'ms');}
-      else set('d-ai','t-ai','down','unreachable');
-      var up=(d.apps||[]).filter(function(a){return a.up;}).length, tot=(d.apps||[]).length;
-      set('d-apps','t-apps',up===tot?'ok':(tot-up>1?'down':'degraded'),up+'/'+tot+' up');
-      set('d-db','t-db',d.neon&&d.neon.ok?'ok':'down',d.neon&&d.neon.ok?('Neon '+d.neon.latencyMs+'ms'):'error');
-      var sp=d.speech;
-      if(sp&&sp.ok){var act=(sp.engines||[]).filter(function(e){return e.runs>0;}).length;set('d-sp','t-sp',(sp.costToday/sp.budget>0.9)?'degraded':'ok',act+' active · $'+sp.costToday.toFixed(2)+'/$'+sp.budget.toFixed(0));}
-      else set('d-sp','t-sp','degraded','n/a');
-      document.getElementById('st-meta').textContent='updated '+ago(d.generatedAt);
-    }).catch(function(){set('d-ai','t-ai','down','status unavailable');document.getElementById('st-meta').textContent='';});
-  }
-  loadStatus(); setInterval(loadStatus,30000);
-})();
-</script>
+  <script>
+  (function(){
+    var STATUS_URL = "https://status.llmvinayminihome.uk/rescreen.json";
+    var $ = function(id){ return document.getElementById(id); };
+    function ago(ep){ if(!ep) return ""; var s=Math.max(0,Math.floor(Date.now()/1000)-ep); return s<60? s+"s ago" : Math.floor(s/60)+"m ago"; }
+    function num(n){ return (n==null)? "—" : Number(n).toLocaleString(); }
+    function tick(){
+      fetch(STATUS_URL,{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
+        if(!d || !d.ready){ throw new Error("not ready"); }
+        $("rs-label").textContent = d.label + (d.done? " · complete" : "");
+        $("rs-fill").style.width = (d.pct||0) + "%";
+        $("rs-pct").textContent = (d.pct!=null? d.pct : "—") + "%";
+        $("rs-decided").textContent = num(d.decided) + " / " + num(d.total);
+        $("rs-rate").textContent = (d.rate_per_min!=null? d.rate_per_min : "—");
+        $("rs-eta").textContent = d.done? "done" : (d.eta_human || "—");
+        var m = d.decisions || {}, chips=[];
+        if(m.keep!=null) chips.push('<span class="rs-chip rs-keep">keep <b>'+num(m.keep)+'</b></span>');
+        if(m.mixed!=null) chips.push('<span class="rs-chip rs-mixed">mixed <b>'+num(m.mixed)+'</b></span>');
+        if(m.borderline!=null) chips.push('<span class="rs-chip rs-mixed">borderline <b>'+num(m.borderline)+'</b></span>');
+        if(m.drop!=null) chips.push('<span class="rs-chip rs-drop">drop <b>'+num(m.drop)+'</b></span>');
+        if(d.llm_errors) chips.push('<span class="rs-chip rs-err">errors <b>'+num(d.llm_errors)+'</b></span>');
+        $("rs-chips").innerHTML = chips.join("");
+        var pill=$("rs-pill");
+        if(d.done){ pill.textContent="DONE"; pill.className="pill rs-off"; }
+        else if(d.running){ pill.textContent="LIVE"; pill.className="pill rs-live"; }
+        else { pill.textContent="IDLE"; pill.className="pill rs-off"; }
+        var dot = d.running? '<span class="rs-dot"></span>' : '';
+        $("rs-status").innerHTML = dot + (d.done? ("Complete — "+d.label) : (d.running? (d.label+" running") : "Idle / between stages"));
+        $("rs-updated").textContent = "updated " + ago(d.updated_epoch);
+      }).catch(function(){
+        $("rs-status").textContent = "Status endpoint offline";
+        var p=$("rs-pill"); p.textContent="OFFLINE"; p.className="pill rs-off";
+        $("rs-updated").textContent="";
+      });
+    }
+    function itick(){
+      fetch("https://status.llmvinayminihome.uk/ingest.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
+        if(!d || !d.ready){ throw new Error("not ready"); }
+        $("ig-fill").style.width = (d.pct||0) + "%";
+        $("ig-pct").textContent = (d.pct!=null? d.pct : "—") + "%";
+        $("ig-ins").textContent = num(d.inserted) + " / " + num(d.target);
+        $("ig-rate").textContent = (d.insert_per_min!=null? num(d.insert_per_min) : "—");
+        $("ig-eta").textContent = d.done? "done" : (d.eta_human || "—");
+        $("ig-label").textContent = "Embedding the curated keep set into the CDMSS vector DB" + (d.done? " · complete" : "");
+        var pill=$("ig-pill");
+        if(d.done){ pill.textContent="DONE"; pill.className="pill rs-off"; }
+        else if(d.running){ pill.textContent="LIVE"; pill.className="pill rs-live"; }
+        else { pill.textContent="IDLE"; pill.className="pill rs-off"; }
+        var dot = d.running? '<span class="rs-dot"></span>' : '';
+        $("ig-status").innerHTML = dot + (d.done? "Ingestion complete" : (d.running? ("Ingesting" + (d.current? " — "+d.current : "")) : "Idle"));
+        $("ig-updated").textContent = "updated " + ago(d.updated_epoch);
+      }).catch(function(){
+        $("ig-status").textContent = "Status endpoint offline";
+        var p=$("ig-pill"); p.textContent="OFFLINE"; p.className="pill rs-off";
+        $("ig-updated").textContent="";
+      });
+    }
+    tick(); setInterval(tick, 5000);
+    itick(); setInterval(itick, 5000);
+  })();
+  </script>
 </body>
 </html>
