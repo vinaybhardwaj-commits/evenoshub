@@ -91,6 +91,10 @@
   .cd-ev .cd-m{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
   .cd-ev .cd-a{margin-left:auto;color:#94a3b8;font-size:11px;font-family:ui-monospace,Menlo,monospace}
   .cd-src .rs-chip{background:#f1f5f9;color:#475569;border-color:#e2e8f0}
+  .ig-wrap{margin-top:2px}
+  .ig-head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-bottom:6px}
+  .ig-head #ig-text{font-weight:600;color:var(--navy)}
+  .ig-head #ig-stats{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
 
   /* Command palette */
   .pal-bg{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:flex-start;justify-content:center;z-index:50}
@@ -226,7 +230,7 @@
       <div class="anchor-head">
         <div>
           <div class="ttl">CDMSS Knowledge Engine <span class="pill rs-off" id="cd-pill">&hellip;</span></div>
-          <div class="sub" id="cd-label">PubMed harvest · corpus · curation — live background activity.</div>
+          <div class="sub" id="cd-label">PubMed harvest + keep-set embedding into the CDMSS corpus.</div>
         </div>
         <a class="open" href="https://even-cdmss.vercel.app/admin/literature" target="_blank" rel="noopener">Literature engine&nbsp; &rarr;</a>
       </div>
@@ -238,28 +242,12 @@
           <div class="rs-stat"><div class="rs-num" id="cd-entities">&mdash;</div><div class="rs-cap">entities</div></div>
         </div>
         <div class="rs-chips cd-src" id="cd-sources"></div>
+        <div class="ig-wrap" id="ig-wrap" style="display:none">
+          <div class="ig-head"><span id="ig-text">Embedding keep set</span><span id="ig-stats"></span></div>
+          <div class="rs-bar"><div class="rs-fill" id="ig-fill"></div></div>
+        </div>
         <div id="cd-events"></div>
         <div class="rs-foot"><span id="cd-status">connecting&hellip;</span><span id="cd-updated"></span></div>
-      </div>
-    </section>
-
-    <section class="anchor" id="ingest-card">
-      <div class="anchor-head">
-        <div>
-          <div class="ttl">CDMSS Ingestion <span class="pill rs-off" id="ig-pill">&hellip;</span></div>
-          <div class="sub" id="ig-label">Embedding the curated keep set into the CDMSS vector DB.</div>
-        </div>
-        <a class="open" href="https://status.llmvinayminihome.uk/ingest.json" target="_blank" rel="noopener">Raw JSON&nbsp; &rarr;</a>
-      </div>
-      <div class="rs-body">
-        <div class="rs-bar"><div class="rs-fill" id="ig-fill"></div></div>
-        <div class="rs-meta">
-          <div class="rs-stat"><div class="rs-num" id="ig-pct">&mdash;</div><div class="rs-cap">complete</div></div>
-          <div class="rs-stat"><div class="rs-num" id="ig-ins">&mdash;</div><div class="rs-cap">chunks in db</div></div>
-          <div class="rs-stat"><div class="rs-num" id="ig-rate">&mdash;</div><div class="rs-cap">per min</div></div>
-          <div class="rs-stat"><div class="rs-num" id="ig-eta">&mdash;</div><div class="rs-cap">ETA</div></div>
-        </div>
-        <div class="rs-foot"><span id="ig-status">connecting&hellip;</span><span id="ig-updated"></span></div>
       </div>
     </section>
 
@@ -349,60 +337,54 @@
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  function num(n){ return n==null? '—' : Number(n).toLocaleString(); }
+  function num(n){ return n==null? '\u2014' : Number(n).toLocaleString(); }
   function ago(iso){ if(!iso) return ''; var s=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/1000)); return s<60? s+'s ago' : s<3600? Math.round(s/60)+'m ago' : s<86400? Math.round(s/3600)+'h ago' : Math.round(s/86400)+'d ago'; }
   var SRC={pubmed:'PubMed',statpearls:'StatPearls',uptodate:'UpToDate',openfda:'OpenFDA','mksap-19':'MKSAP',textbook:'Textbook'};
+  var cd=null, ig=null;
+  function repaint(){
+    var pill=$('cd-pill'); if(!pill) return;
+    var live = !!(ig && ig.running);
+    var harv = !!(cd && (cd.state==='harvesting'||cd.state==='curating'||cd.state==='active'));
+    if(live){ pill.textContent='INGESTING'; pill.className='pill rs-live'; }
+    else if(harv){ pill.textContent=cd.state.toUpperCase(); pill.className='pill rs-live'; }
+    else { pill.textContent='IDLE'; pill.className='pill rs-off'; }
+    var w=$('ig-wrap');
+    if(w){
+      if(ig && ig.running){ w.style.display='block'; $('ig-text').textContent='Embedding keep set'+(ig.current?(' \u2014 '+ig.current):''); $('ig-stats').textContent=num(ig.inserted)+' / '+num(ig.target)+' \u00b7 '+ig.pct+'% \u00b7 '+num(ig.rate)+'/min'; $('ig-fill').style.width=(ig.pct||0)+'%'; }
+      else { w.style.display='none'; }
+    }
+    var dot=(live||harv)?'<span class="rs-dot"></span>':'';
+    var msg = live ? ('Embedding keep set'+(ig.current?(' \u2014 '+ig.current):'')+' \u00b7 '+ig.pct+'%') : (harv ? 'Harvesting' : (cd && cd.lastRunAt ? ('Idle \u00b7 last harvest '+ago(cd.lastRunAt)) : 'Idle'));
+    var st=$('cd-status'); if(st) st.innerHTML=dot+msg;
+  }
   function tick(){
     fetch('https://status.evenos.app/api/cdmss',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
       if(!d.ok) throw new Error('x');
-      var c=d.corpus,h=d.harvest;
+      var c=d.corpus,h=d.harvest; cd={state:d.state,lastRunAt:h.lastRunAt};
       $('cd-chunks').textContent=num(c.chunks);
       $('cd-topics').textContent=h.topicsRun+' / '+h.topicsTotal;
       $('cd-articles').textContent=num(c.articles);
       $('cd-entities').textContent=num(c.entities);
       $('cd-sources').innerHTML=(c.sources||[]).map(function(s){return '<span class="rs-chip">'+(SRC[s.name]||s.name)+' <b>'+num(s.count)+'</b></span>';}).join('');
-      $('cd-events').innerHTML=(d.events||[]).slice(0,6).map(function(e){
+      $('cd-events').innerHTML=(d.events||[]).slice(0,5).map(function(e){
         var col=e.errors>0?'var(--amber)':'var(--green)';
-        var dot=e.running?'<span class="rs-dot"></span>':'<span class="dot" style="background:'+col+'"></span>';
-        var meta='found '+num(e.found)+' · new '+num(e.inserted)+(e.errors?' · '+e.errors+' err':'');
-        return '<div class="cd-ev">'+dot+'<span class="cd-t">'+(e.topic||'(global)')+'</span><span class="cd-m">'+meta+'</span><span class="cd-a">'+ago(e.at)+'</span></div>';
+        var dotc=e.running?'<span class="rs-dot"></span>':'<span class="dot" style="background:'+col+'"></span>';
+        var meta='found '+num(e.found)+' \u00b7 new '+num(e.inserted)+(e.errors?' \u00b7 '+e.errors+' err':'');
+        return '<div class="cd-ev">'+dotc+'<span class="cd-t">'+(e.topic||'(global)')+'</span><span class="cd-m">'+meta+'</span><span class="cd-a">'+ago(e.at)+'</span></div>';
       }).join('');
-      var pill=$('cd-pill'),st=d.state;
-      if(st==='harvesting'||st==='curating'||st==='active'){pill.textContent=st.toUpperCase();pill.className='pill rs-live';}
-      else{pill.textContent='IDLE';pill.className='pill rs-off';}
-      var dt=(st==='idle')?'':'<span class="rs-dot"></span>';
-      $('cd-status').innerHTML=dt+(h.running?'Pipeline running':(h.lastRunAt?('Idle · last harvest '+ago(h.lastRunAt)):'No harvests yet'));
-      $('cd-label').textContent='PubMed harvest · '+num(c.chunks)+' chunks · '+num(c.topics)+' curated topics';
+      $('cd-label').textContent='PubMed harvest + keep-set embedding \u00b7 '+num(c.chunks)+' chunks \u00b7 '+num(c.topics)+' curated topics';
       $('cd-updated').textContent='updated '+ago(d.generatedAt);
-    }).catch(function(){
-      var s=$('cd-status'); if(s) s.textContent='CDMSS endpoint offline';
-      var p=$('cd-pill'); if(p){ p.textContent='OFFLINE'; p.className='pill rs-off'; }
-    });
+      repaint();
+    }).catch(function(){ var p=$('cd-pill'); if(p){ p.textContent='OFFLINE'; p.className='pill rs-off'; } var s=$('cd-status'); if(s) s.textContent='CDMSS endpoint offline'; });
   }
-  function agoEp(ep){ if(!ep) return ''; var s=Math.max(0,Math.floor(Date.now()/1000)-ep); return s<60? s+'s ago' : s<3600? Math.floor(s/60)+'m ago' : Math.floor(s/3600)+'h ago'; }
   function itick(){
-    fetch("https://status.llmvinayminihome.uk/ingest.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
-      if(!d || !d.ready){ throw new Error("not ready"); }
-      $("ig-fill").style.width = (d.pct||0) + "%";
-      $("ig-pct").textContent = (d.pct!=null? d.pct : "—") + "%";
-      $("ig-ins").textContent = num(d.inserted) + " / " + num(d.target);
-      $("ig-rate").textContent = (d.insert_per_min!=null? num(d.insert_per_min) : "—");
-      $("ig-eta").textContent = d.done? "done" : (d.eta_human || "—");
-      $("ig-label").textContent = "Embedding the curated keep set into the CDMSS vector DB" + (d.done? " · complete" : "");
-      var pill=$("ig-pill");
-      if(d.done){ pill.textContent="DONE"; pill.className="pill rs-off"; }
-      else if(d.running){ pill.textContent="LIVE"; pill.className="pill rs-live"; }
-      else { pill.textContent="IDLE"; pill.className="pill rs-off"; }
-      var dot = d.running? '<span class="rs-dot"></span>' : '';
-      $("ig-status").innerHTML = dot + (d.done? "Ingestion complete" : (d.running? ("Ingesting" + (d.current? " — "+d.current : "")) : "Idle"));
-      $("ig-updated").textContent = "updated " + agoEp(d.updated_epoch);
-    }).catch(function(){
-      var s=$("ig-status"); if(s) s.textContent = "Status endpoint offline";
-      var p=$("ig-pill"); if(p){ p.textContent="OFFLINE"; p.className="pill rs-off"; }
-      var u=$("ig-updated"); if(u) u.textContent="";
-    });
+    fetch('https://status.llmvinayminihome.uk/ingest.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      if(!d || !d.ready){ ig=null; repaint(); return; }
+      ig={ running:!!d.running, done:!!d.done, pct:(d.pct!=null?d.pct:0), inserted:d.inserted, target:d.target, rate:d.insert_per_min, current:d.current };
+      repaint();
+    }).catch(function(){ ig=null; repaint(); });
   }
-  tick(); setInterval(tick, 10000);
+  tick(); setInterval(tick, 8000);
   itick(); setInterval(itick, 5000);
 })();
 (function(){
